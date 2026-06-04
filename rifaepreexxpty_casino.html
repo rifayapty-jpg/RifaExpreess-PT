@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="RifaEpreexx PTY - La plataforma #1 de rifas y sorteos de motocicletas, vehículos y premios de lujo en Panamá.">
+<meta name="theme-color" content="#000000">
+<title>RifaEpreexx PTY | Sorteos de Élite</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --g1:#C9A84C;--g2:#E8C96A;--g3:#F5E099;--g4:#A07830;--g5:#7A5A20;
+  --glow:rgba(201,168,76,0.18);--glow2:rgba(201,168,76,0.06);
+  --ink:#03030A;--ink2:#07070F;--ink3:#0D0D1A;--ink4:#121220;--ink5:#171728;
+  --card:#0E0E1C;--card2:#13131F;
+  --txt:#EDE8DA;--txt2:#B8B099;--muted:#6A6255;
+  --red:#C8303A;--red2:#A82030;
+  --green:#1EA86A;--green2:#167850;
+  --border:rgba(201,168,76,0.1);--border2:rgba(201,168,76,0.25);--border3:rgba(201,168,76,0.4);
+  --sep:rgba(255,255,255,0.05);
+  --yappy:#00C853;
+}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--txt);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;
+  background-image:
+    radial-gradient(ellipse 70% 35% at 50% 0%,rgba(201,168,76,0.055) 0%,transparent 65%),
+    url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C9A84C' fill-opacity='0.022'%3E%3Cpath d='M40 5L46 30H72L51 46L58 70L40 56L22 70L29 46L8 30H34Z'/%3E%3C/g%3E%3C/svg%3E");
+}
+a{text-decoration:none;color:inherit}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--ink2)}
+::-webkit-scrollbar-thumb{background:var(--g4);border-radius:2px}
+
+/* ===== NAV ===== */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;
+  background:rgba(3,3,10,0.97);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+  height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;gap:1rem}
+.nav-logo-wrap{display:flex;flex-direction:column;line-height:1;flex-shrink:0}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.45rem;letter-spacing:2px;color:var(--g2)}
+.nav-logo em{font-style:normal;color:var(--red)}
+.nav-tagline{font-family:'DM Sans',sans-serif;font-size:0.5rem;letter-spacing:3.5px;text-transform:uppercase;color:var(--muted);font-weight:300;margin-top:2px}
+.nav-links{display:flex;gap:2.2rem;list-style:none}
+.nav-links a{font-size:0.72rem;font-weight:500;color:var(--muted);letter-spacing:1.8px;text-transform:uppercase;transition:color 0.2s;position:relative;padding-bottom:2px}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px;background:var(--g1);transform:scaleX(0);transition:transform 0.25s;transform-origin:left}
+.nav-links a:hover{color:var(--g2)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-actions{display:flex;gap:0.75rem;align-items:center}
+.btn-nav-verify{background:transparent;border:1px solid var(--border2);color:var(--g1);padding:0.48rem 1.2rem;border-radius:0;font-size:0.7rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:1.5px;text-transform:uppercase;transition:all 0.2s}
+.btn-nav-verify:hover{background:var(--glow2);border-color:var(--border3);color:var(--g2)}
+.btn-nav-admin{background:transparent;border:1px solid var(--sep);color:var(--muted);padding:0.48rem 0.85rem;border-radius:0;font-size:0.68rem;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:1px;transition:all 0.2s}
+.btn-nav-admin:hover{border-color:var(--border2);color:var(--g1)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+.hamburger span{display:block;width:22px;height:1px;background:var(--g2);border-radius:1px;transition:all 0.3s}
+.mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;background:rgba(3,3,10,0.99);border-bottom:1px solid var(--border);padding:2rem 2.5rem;z-index:199;flex-direction:column;gap:1.5rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:0.78rem;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;color:var(--txt2);padding:0.75rem 0;border-bottom:1px solid var(--border)}
+
+/* ===== HERO ===== */
+.hero{padding:7rem 2rem 5rem;text-align:center;position:relative;overflow:hidden;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.hero-corner{position:absolute;width:120px;height:120px;opacity:0.08}
+.hero-corner.tl{top:78px;left:28px;border-top:1px solid var(--g1);border-left:1px solid var(--g1)}
+.hero-corner.tr{top:78px;right:28px;border-top:1px solid var(--g1);border-right:1px solid var(--g1)}
+.hero-corner.bl{bottom:36px;left:28px;border-bottom:1px solid var(--g1);border-left:1px solid var(--g1)}
+.hero-corner.br{bottom:36px;right:28px;border-bottom:1px solid var(--g1);border-right:1px solid var(--g1)}
+.hero-beam{position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:55%;background:linear-gradient(to bottom,var(--g4),transparent);opacity:0.25;pointer-events:none}
+.hero-glow{position:absolute;top:-8%;left:50%;transform:translateX(-50%);width:800px;height:420px;background:radial-gradient(ellipse,rgba(201,168,76,0.055) 0%,transparent 65%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:0.8rem;border:1px solid var(--border2);padding:0.4rem 1.4rem;font-size:0.62rem;font-weight:600;letter-spacing:3px;color:var(--g1);text-transform:uppercase;margin-bottom:2.5rem;position:relative;z-index:1}
+.hero-tag::before,.hero-tag::after{content:'◆';font-size:0.4rem;color:var(--g4);opacity:0.7}
+.hero-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.25}}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(3.8rem,11vw,8rem);line-height:0.9;letter-spacing:2px;margin-bottom:1.6rem;position:relative;z-index:1;font-weight:900}
+.hero h1 .l1{display:block;font-size:0.38em;letter-spacing:8px;text-transform:uppercase;font-family:'DM Sans',sans-serif;font-weight:300;margin-bottom:0.5em;color:var(--txt2)}
+.hero h1 .l2{display:block;background:linear-gradient(135deg,var(--g5) 0%,var(--g4) 20%,var(--g2) 45%,var(--g3) 60%,var(--g1) 80%,var(--g4) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero h1 .l3{display:block;color:transparent;-webkit-text-stroke:1px rgba(201,168,76,0.3);font-size:0.7em;letter-spacing:14px;text-transform:uppercase;font-family:'DM Sans',sans-serif;font-weight:600;margin-top:0.25em}
+.hero-orn{display:flex;align-items:center;gap:1.2rem;margin:0 auto 1.8rem;width:320px;position:relative;z-index:1}
+.hero-orn::before,.hero-orn::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--g4))}
+.hero-orn span{color:var(--g2);font-size:0.68rem;letter-spacing:3px;opacity:0.7}
+.hero-sub{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--txt2);max-width:480px;line-height:1.75;margin-bottom:0.6rem;position:relative;z-index:1;font-style:italic}
+.hero-sub strong{color:var(--g2);font-style:normal}
+.hero-pills{display:flex;gap:0.85rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.8rem;position:relative;z-index:1}
+.hero-pill{display:flex;align-items:center;gap:0.5rem;border:1px solid var(--border);padding:0.32rem 1rem;font-size:0.65rem;color:var(--muted);font-weight:500;letter-spacing:1.8px;text-transform:uppercase}
+.hero-pill .dot{width:4px;height:4px;border-radius:50%;background:var(--green);flex-shrink:0}
+.hero-ctas{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+.btn-primary{background:linear-gradient(135deg,var(--g5) 0%,var(--g4) 30%,var(--g1) 65%,var(--g2) 100%);color:var(--ink);padding:1rem 2.8rem;border-radius:0;font-weight:700;font-size:0.78rem;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;letter-spacing:2.5px;text-transform:uppercase;transition:all 0.3s;box-shadow:0 0 28px rgba(201,168,76,0.12),inset 0 1px 0 rgba(255,255,255,0.18);position:relative;overflow:hidden}
+.btn-primary::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 35%,rgba(255,255,255,0.14) 55%,transparent 65%);transform:translateX(-120%);transition:transform 0.55s}
+.btn-primary:hover::after{transform:translateX(120%)}
+.btn-primary:hover{box-shadow:0 0 48px rgba(201,168,76,0.28),inset 0 1px 0 rgba(255,255,255,0.22);transform:translateY(-2px)}
+.btn-secondary{background:transparent;color:var(--g2);padding:1rem 2.8rem;border-radius:0;font-weight:500;font-size:0.78rem;cursor:pointer;border:1px solid var(--border2);font-family:'DM Sans',sans-serif;letter-spacing:2.5px;text-transform:uppercase;transition:all 0.2s}
+.btn-secondary:hover{border-color:var(--border3);background:var(--glow2);color:var(--g3)}
+
+/* ===== STATS BAR ===== */
+.stats-bar{border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:flex;justify-content:center;flex-wrap:wrap;background:var(--ink2);position:relative;overflow:hidden}
+.stats-bar::before{content:'';position:absolute;top:0;left:15%;right:15%;height:1px;background:linear-gradient(90deg,transparent,var(--g4),transparent)}
+.stat-item{flex:1;min-width:130px;max-width:200px;padding:1.7rem 1rem;text-align:center;border-right:1px solid var(--border)}
+.stat-item:last-child{border-right:none}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--g2);letter-spacing:1px;line-height:1}
+.stat-lbl{font-size:0.6rem;color:var(--muted);letter-spacing:2.5px;text-transform:uppercase;margin-top:5px}
+
+/* ===== TIMER ===== */
+.timer-section{background:var(--ink3);border-bottom:1px solid var(--border);padding:1.4rem 2rem;display:flex;align-items:center;justify-content:center;gap:2.5rem;flex-wrap:wrap}
+.timer-label{font-size:0.62rem;font-weight:600;color:var(--muted);letter-spacing:2.5px;text-transform:uppercase;display:flex;align-items:center;gap:0.6rem}
+.timer-icon{color:var(--g1);font-size:0.7rem}
+.timer-units{display:flex;align-items:center;gap:1rem}
+.t-unit{text-align:center}
+.t-num{font-family:'Playfair Display',serif;font-size:2.4rem;color:var(--g2);line-height:1;display:block;min-width:2.5ch;text-align:center}
+.t-lbl{font-size:0.52rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:3px;display:block}
+.t-sep{font-family:'Playfair Display',serif;font-size:2rem;color:var(--border3);line-height:1;margin-bottom:14px}
+
+/* ===== SECTIONS ===== */
+.section{padding:5rem 2rem;max-width:1140px;margin:0 auto}
+.section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2.5rem;flex-wrap:wrap;gap:1rem}
+.section-eyebrow{font-size:0.6rem;letter-spacing:3.5px;text-transform:uppercase;color:var(--g4);font-weight:600;margin-bottom:0.6rem}
+.section-title{font-family:'Playfair Display',serif;font-size:2.6rem;letter-spacing:1px;line-height:1.1;color:var(--txt)}
+.section-title span{color:var(--g2)}
+.section-subtitle{font-size:0.78rem;color:var(--muted);margin-top:0.35rem;letter-spacing:0.3px}
+.section-link{font-size:0.7rem;color:var(--g1);cursor:pointer;letter-spacing:2px;text-transform:uppercase;opacity:0.8;white-space:nowrap;border-bottom:1px solid var(--border2);padding-bottom:1px}
+.section-link:hover{opacity:1;color:var(--g2)}
+.section-divider{border:none;border-top:1px solid var(--border);margin:0}
+
+/* ===== FILTERS ===== */
+.filters{display:flex;gap:0.5rem;margin-bottom:2.2rem;flex-wrap:wrap}
+.filter-btn{padding:0.5rem 1.4rem;border-radius:0;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:0.68rem;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;transition:all 0.2s;letter-spacing:2px;text-transform:uppercase}
+.filter-btn.active,.filter-btn:hover{background:var(--g1);color:var(--ink);border-color:var(--g1);font-weight:700}
+
+/* ===== RIFA CARDS ===== */
+.rifas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:1.5rem}
+.rifa-card{background:var(--card);border-radius:0;overflow:hidden;border:1px solid var(--border);transition:transform 0.3s,border-color 0.3s,box-shadow 0.3s;cursor:pointer;position:relative}
+.rifa-card:hover{transform:translateY(-5px);border-color:var(--border2);box-shadow:0 24px 60px rgba(0,0,0,0.55),0 0 35px rgba(201,168,76,0.07)}
+.rifa-img{height:200px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;font-size:5rem;background:var(--ink4)}
+.rifa-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,var(--card));pointer-events:none}
+.rifa-badge{position:absolute;top:12px;left:12px;font-size:0.58rem;font-weight:800;letter-spacing:2px;padding:4px 10px;text-transform:uppercase;z-index:3}
+.badge-hot{background:var(--red);color:#fff;box-shadow:0 0 14px rgba(200,48,58,0.45)}
+.badge-new{background:var(--g1);color:var(--ink)}
+.badge-sold{background:var(--muted);color:var(--ink2)}
+.rifa-pct{position:absolute;bottom:14px;right:12px;font-size:0.65rem;font-weight:700;color:var(--g2);z-index:3;letter-spacing:1.5px;font-family:'DM Sans',sans-serif}
+.rifa-prog-wrap{position:absolute;bottom:0;left:0;right:0;height:2px;background:rgba(255,255,255,0.04);z-index:3}
+.rifa-prog{height:100%;background:linear-gradient(90deg,var(--g5),var(--g2));transition:width 0.8s ease}
+.rifa-body{padding:1.4rem}
+.rifa-name{font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;margin-bottom:0.35rem;line-height:1.3;color:var(--txt)}
+.rifa-desc{font-size:0.77rem;color:var(--muted);margin-bottom:1.2rem;line-height:1.65}
+.rifa-footer{display:flex;align-items:center;justify-content:space-between;gap:0.5rem;border-top:1px solid var(--border);padding-top:1rem}
+.rifa-price{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--g2);letter-spacing:1px;line-height:1}
+.rifa-price-lbl{font-size:0.6rem;color:var(--muted);font-family:'DM Sans',sans-serif;letter-spacing:1.5px;text-transform:uppercase}
+.rifa-btn{background:transparent;color:var(--g1);border:1px solid var(--border2);padding:0.6rem 1.2rem;font-weight:600;font-size:0.7rem;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:2px;text-transform:uppercase;transition:all 0.2s}
+.rifa-btn:hover{background:var(--g1);color:var(--ink)}
+.rifa-empty{grid-column:1/-1;text-align:center;padding:3rem;color:var(--muted);font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1.1rem}
+
+/* ===== GANADORES ===== */
+.winners-section{background:var(--ink2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:5rem 2rem;position:relative}
+.winners-section::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--g4),transparent)}
+.winners-inner{max-width:1140px;margin:0 auto}
+.winners-head{text-align:center;margin-bottom:3rem}
+.winners-head .eyebrow{font-size:0.6rem;letter-spacing:3.5px;text-transform:uppercase;color:var(--g4);font-weight:600;margin-bottom:0.75rem}
+.winners-head h2{font-family:'Playfair Display',serif;font-size:2.4rem;letter-spacing:1px;margin-bottom:0.5rem;color:var(--txt)}
+.winners-head p{color:var(--muted);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem}
+.winners-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:1rem}
+.winner-card{background:var(--card2);padding:1.2rem 1.4rem;border:1px solid var(--border);display:flex;align-items:center;gap:1.1rem;transition:border-color 0.2s,box-shadow 0.2s}
+.winner-card:hover{border-color:var(--border2);box-shadow:0 4px 20px rgba(201,168,76,0.06)}
+.winner-avatar{width:46px;height:46px;background:linear-gradient(135deg,var(--g5),var(--g1));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;color:var(--ink);flex-shrink:0;font-family:'Playfair Display',serif;border:1px solid var(--border2)}
+.winner-name{font-weight:600;font-size:0.88rem;margin-bottom:2px;color:var(--txt)}
+.winner-prize{font-size:0.74rem;color:var(--g1);margin-bottom:2px}
+.winner-date{font-size:0.66rem;color:var(--muted);letter-spacing:0.5px}
+.winners-empty{text-align:center;padding:3rem;color:var(--muted);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem}
+.winners-empty-icon{font-size:1.5rem;margin-bottom:1rem;display:block;opacity:0.3;letter-spacing:6px;color:var(--g4)}
+
+/* ===== VERIFICAR ===== */
+.verify-section{padding:5rem 2rem;max-width:640px;margin:0 auto;text-align:center}
+.verify-head{margin-bottom:2.5rem}
+.verify-head .eyebrow{font-size:0.6rem;letter-spacing:3.5px;text-transform:uppercase;color:var(--g4);font-weight:600;margin-bottom:0.75rem}
+.verify-head h2{font-family:'Playfair Display',serif;font-size:2.4rem;letter-spacing:1px;margin-bottom:0.6rem}
+.verify-head p{color:var(--muted);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;line-height:1.75}
+.verify-head p strong{color:var(--g2);font-style:normal}
+.verify-tabs{display:flex;gap:0;background:transparent;border:1px solid var(--border);padding:3px;margin-bottom:1.8rem}
+.verify-tab{flex:1;padding:0.72rem;border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.72rem;font-weight:500;cursor:pointer;transition:all 0.2s;letter-spacing:2px;text-transform:uppercase}
+.verify-tab.active{background:var(--g1);color:var(--ink);font-weight:700}
+.verify-row{display:flex;gap:0.75rem;margin-bottom:1rem}
+.verify-input{flex:1;background:var(--ink3);border:1px solid var(--border);padding:0.85rem 1.2rem;color:var(--txt);font-family:'DM Sans',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.2s}
+.verify-input:focus{border-color:var(--border2)}
+.verify-input::placeholder{color:var(--muted)}
+.verify-search-btn{background:var(--g1);color:var(--ink);border:none;padding:0 1.6rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.72rem;white-space:nowrap;transition:background 0.2s;letter-spacing:1.5px;text-transform:uppercase}
+.verify-search-btn:hover{background:var(--g2)}
+.verify-hint{font-size:0.74rem;color:var(--muted);line-height:1.65;text-align:left}
+.verify-hint strong{color:var(--green)}
+.verify-result{margin-top:1.8rem;padding:1.6rem;display:none;text-align:left}
+.verify-result.show{display:block}
+.verify-result.approved{background:rgba(30,168,106,0.06);border:1px solid rgba(30,168,106,0.2)}
+.verify-result.pending{background:rgba(201,168,76,0.05);border:1px solid var(--border2)}
+.verify-result.notfound{background:rgba(200,48,58,0.06);border:1px solid rgba(200,48,58,0.2)}
+.vr-status{font-weight:700;font-size:0.95rem;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.5rem;font-family:'Playfair Display',serif}
+.vr-detail{font-size:0.82rem;color:var(--txt2);line-height:1.85}
+.verify-loading{text-align:center;padding:2rem;color:var(--muted);font-size:0.85rem;display:none;font-family:'Cormorant Garamond',serif;font-style:italic;letter-spacing:1px}
+.verify-loading.show{display:block}
+
+/* ===== COOKIE BANNER ===== */
+.cookie-banner{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);z-index:300;background:var(--ink3);border:1px solid var(--border2);padding:1.1rem 1.6rem;display:flex;align-items:center;gap:1.5rem;max-width:600px;width:calc(100% - 2rem);box-shadow:0 8px 40px rgba(0,0,0,0.65)}
+.cookie-text{font-size:0.76rem;color:var(--txt2);line-height:1.55;flex:1}
+.cookie-text a{color:var(--g1)}
+.cookie-btn{background:var(--g1);color:var(--ink);border:none;padding:0.5rem 1.4rem;font-weight:700;font-size:0.72rem;cursor:pointer;white-space:nowrap;font-family:'DM Sans',sans-serif;letter-spacing:1.5px;text-transform:uppercase}
+.cookie-banner.hide{display:none}
+
+/* ===== WHATSAPP FLOAT ===== */
+.whatsapp-float{position:fixed;bottom:2rem;right:2rem;z-index:150;background:var(--yappy);color:#fff;width:54px;height:54px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 20px rgba(0,200,83,0.3);transition:transform 0.2s,box-shadow 0.2s}
+.whatsapp-float:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(0,200,83,0.45)}
+
+/* ===== MODAL ===== */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.93);z-index:400;align-items:center;justify-content:center;padding:1rem}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--ink3);border:1px solid var(--border2);padding:2.2rem;width:100%;max-width:500px;max-height:92vh;overflow-y:auto;position:relative}
+.modal-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 5%,var(--g4) 30%,var(--g2) 50%,var(--g4) 70%,transparent 95%)}
+.modal-close{position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--muted);width:34px;height:34px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;transition:all 0.2s}
+.modal-close:hover{border-color:var(--border2);color:var(--g1)}
+.modal-title{font-family:'Playfair Display',serif;font-size:2rem;letter-spacing:1px;margin-bottom:0.2rem;color:var(--txt)}
+.modal-subtitle{font-size:0.75rem;color:var(--g1);margin-bottom:1.8rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase}
+.modal-section{font-size:0.6rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--g4);margin:1.5rem 0 0.9rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)}
+.form-group{margin-bottom:1rem}
+.form-label{display:block;font-size:0.68rem;font-weight:600;color:var(--txt2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:0.45rem}
+.form-label .req{color:var(--red)}
+.form-input,.form-select{width:100%;background:rgba(255,255,255,0.025);border:1px solid var(--border);padding:0.8rem 1rem;color:var(--txt);font-family:'DM Sans',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.2s;-webkit-appearance:none;appearance:none}
+.form-input:focus,.form-select:focus{border-color:var(--border2)}
+.form-input::placeholder{color:var(--muted)}
+.form-select option{background:var(--ink3)}
+.qty-row{display:flex;align-items:center;gap:1.2rem;margin-bottom:0.5rem}
+.qty-btn{background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--g1);width:40px;height:40px;cursor:pointer;font-size:1.4rem;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;transition:all 0.2s;flex-shrink:0}
+.qty-btn:hover{background:var(--g1);color:var(--ink);border-color:var(--g1)}
+.qty-num{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--g2);min-width:2.5ch;text-align:center;letter-spacing:1px}
+.qty-info{font-size:0.82rem;color:var(--muted);line-height:1.5}
+.qty-min{font-size:0.7rem;color:var(--muted);margin-top:0.4rem;line-height:1.6}
+.payment-info{background:rgba(255,255,255,0.02);border:1px solid var(--border);padding:1.1rem;margin-top:0.75rem}
+.payment-info-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;font-size:0.82rem}
+.payment-info-row:last-child{margin-bottom:0}
+.payment-info-lbl{color:var(--muted);font-size:0.7rem;letter-spacing:0.5px}
+.payment-info-val{font-weight:600;color:var(--txt);display:flex;align-items:center;gap:0.5rem}
+.copy-btn{background:transparent;border:1px solid var(--border);color:var(--muted);padding:2px 8px;font-size:0.62rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;letter-spacing:0.5px}
+.copy-btn:hover{border-color:var(--border2);color:var(--g1)}
+.payment-note{font-size:0.7rem;color:var(--muted);margin-top:0.75rem;line-height:1.65}
+.file-upload{width:100%;background:rgba(255,255,255,0.02);border:1px dashed var(--border);padding:1.5rem;text-align:center;cursor:pointer;transition:all 0.2s;position:relative}
+.file-upload:hover{border-color:var(--border2)}
+.file-upload input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.file-upload-icon{font-size:1.4rem;margin-bottom:0.4rem;display:block;color:var(--g4)}
+.file-upload-text{font-size:0.78rem;color:var(--muted)}
+.file-upload-hint{font-size:0.66rem;color:var(--muted);opacity:0.55;margin-top:0.2rem}
+.file-preview{max-width:100%;max-height:100px;margin-top:0.75rem;display:none}
+.terms-check{display:flex;gap:0.75rem;align-items:flex-start;margin:1.4rem 0;background:rgba(255,255,255,0.02);border:1px solid var(--border);padding:1rem}
+.terms-check input[type=checkbox]{margin-top:3px;flex-shrink:0;accent-color:var(--g1);width:15px;height:15px;cursor:pointer}
+.terms-check label{font-size:0.74rem;color:var(--txt2);line-height:1.65;cursor:pointer}
+.terms-check label strong{color:var(--txt)}
+.total-row{display:flex;justify-content:space-between;align-items:center;background:rgba(201,168,76,0.04);border:1px solid var(--border2);padding:1rem 1.2rem;margin-bottom:1rem}
+.total-lbl{font-size:0.68rem;color:var(--txt2);font-weight:500;letter-spacing:2px;text-transform:uppercase}
+.total-amount{font-family:'Playfair Display',serif;font-size:2rem;color:var(--g2);letter-spacing:1px}
+.btn-confirm{width:100%;background:linear-gradient(135deg,var(--g5),var(--g4),var(--g1));color:var(--ink);border:none;padding:1.1rem;font-weight:700;font-size:0.82rem;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:2.5px;text-transform:uppercase;transition:all 0.2s}
+.btn-confirm:hover{background:linear-gradient(135deg,var(--g4),var(--g2))}
+.btn-confirm:disabled{opacity:0.4;cursor:not-allowed}
+.modal-note{font-size:0.68rem;color:var(--muted);text-align:center;margin-top:0.75rem;line-height:1.6;letter-spacing:0.5px}
+
+/* ===== COMPRA EXITOSA ===== */
+.success-box{text-align:center;padding:1rem 0}
+.success-icon{font-size:1.8rem;margin-bottom:1rem;display:block;animation:pop 0.5s cubic-bezier(0.175,0.885,0.32,1.275);color:var(--g2);letter-spacing:8px}
+@keyframes pop{0%{transform:scale(0)}100%{transform:scale(1)}}
+.success-title{font-family:'Playfair Display',serif;font-size:2.1rem;letter-spacing:2px;color:var(--g2);margin-bottom:0.5rem}
+.success-sub{font-size:0.83rem;color:var(--muted);margin-bottom:1.8rem;line-height:1.75}
+.numbers-box{background:rgba(201,168,76,0.04);border:1px solid var(--border2);padding:1.4rem;margin-bottom:1rem}
+.numbers-lbl{font-size:0.6rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:0.7rem}
+.numbers-status{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(201,168,76,0.07);border:1px solid var(--border2);padding:3px 10px;font-size:0.65rem;font-weight:600;color:var(--g1);margin-bottom:0.75rem;letter-spacing:1.5px}
+.numbers-val{font-family:'Playfair Display',serif;font-size:1.55rem;color:var(--g2);letter-spacing:4px;margin-bottom:0.75rem}
+.btn-copy-nums{background:transparent;border:1px solid rgba(30,168,106,0.3);color:var(--green);padding:0.55rem 1.2rem;font-size:0.72rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;width:100%;margin-bottom:0.5rem;letter-spacing:1.5px;text-transform:uppercase}
+.btn-copy-nums:hover{background:rgba(30,168,106,0.07)}
+.btn-wa{background:var(--yappy);color:#fff;border:none;padding:0.7rem 1.2rem;font-size:0.8rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.2s;width:100%;margin-bottom:0.75rem;display:flex;align-items:center;justify-content:center;gap:0.5rem;letter-spacing:0.5px}
+.btn-wa:hover{background:#00a846}
+.success-bonus{background:rgba(200,48,58,0.06);border:1px solid rgba(200,48,58,0.16);padding:0.9rem;font-size:0.74rem;color:var(--txt2);line-height:1.7;margin-bottom:0.75rem}
+.btn-go-verify{background:transparent;border:1px solid var(--border);color:var(--muted);padding:0.6rem 1.2rem;font-size:0.72rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;width:100%;letter-spacing:1.5px;text-transform:uppercase}
+.btn-go-verify:hover{border-color:var(--border2);color:var(--g1)}
+
+/* ===== ADMIN MODAL ===== */
+.admin-modal{max-width:920px!important;padding:0!important}
+.admin-login{padding:3rem;text-align:center}
+.admin-login h3{font-family:'Playfair Display',serif;font-size:1.9rem;letter-spacing:2px;margin-bottom:0.4rem;color:var(--txt)}
+.admin-login p{font-size:0.78rem;color:var(--muted);margin-bottom:1.8rem}
+.pin-inputs{display:flex;gap:0.75rem;justify-content:center;margin-bottom:1.2rem}
+.pin-input{width:56px;height:68px;background:var(--ink4);border:1px solid var(--border);text-align:center;font-family:'Playfair Display',serif;font-size:2rem;color:var(--g2);outline:none;transition:border-color 0.2s;caret-color:transparent}
+.pin-input:focus{border-color:var(--border2)}
+.pin-error{font-size:0.76rem;color:var(--red);margin-bottom:0.75rem;min-height:1.2em}
+.btn-admin-enter{background:linear-gradient(135deg,var(--g5),var(--g1));color:var(--ink);border:none;padding:0.8rem 2.4rem;font-weight:700;font-size:0.82rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity 0.2s;letter-spacing:2px;text-transform:uppercase}
+.btn-admin-enter:hover{opacity:0.85}
+.admin-hint{font-size:0.68rem;color:var(--muted);margin-top:0.75rem}
+.admin-hint code{background:rgba(255,255,255,0.05);padding:1px 5px;font-family:monospace;color:var(--g1)}
+.admin-panel{display:none}
+.admin-panel.show{display:flex;flex-direction:column}
+.admin-tabs{display:flex;border-bottom:1px solid var(--border);background:var(--ink2);overflow:hidden}
+.admin-tab{flex:1;padding:1.1rem;border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:0.7rem;font-weight:500;cursor:pointer;transition:all 0.2s;border-bottom:2px solid transparent;letter-spacing:2px;text-transform:uppercase}
+.admin-tab.active{color:var(--g1);border-bottom-color:var(--g1);background:rgba(201,168,76,0.04)}
+.admin-content{padding:1.8rem;max-height:calc(90vh - 120px);overflow-y:auto}
+.admin-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0.75rem;margin-bottom:1.8rem}
+.admin-stat{background:var(--ink4);padding:1.1rem;text-align:center;border:1px solid var(--border)}
+.admin-stat-num{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--g2)}
+.admin-stat-lbl{font-size:0.6rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+.admin-form-row{display:grid;grid-template-columns:1fr 1fr auto;gap:0.75rem;margin-bottom:1rem;align-items:end}
+.admin-btn{background:var(--g1);color:var(--ink);border:none;padding:0.72rem 1rem;font-weight:700;font-size:0.75rem;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;height:41px;transition:all 0.2s;letter-spacing:1.5px;text-transform:uppercase}
+.admin-btn:hover{background:var(--g2)}
+.admin-btn.danger{background:var(--red);color:#fff}
+.admin-btn.danger:hover{background:var(--red2)}
+.admin-btn.secondary{background:rgba(255,255,255,0.04);color:var(--txt);border:1px solid var(--border)}
+.admin-btn.secondary:hover{border-color:var(--border2);color:var(--g1)}
+.table-wrap{overflow-x:auto;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:0.8rem}
+th{background:var(--ink4);padding:0.75rem 0.9rem;text-align:left;font-size:0.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+td{padding:0.75rem 0.9rem;border-top:1px solid var(--border);color:var(--txt2);vertical-align:middle}
+tr:hover td{background:rgba(201,168,76,0.02)}
+.badge-approved{background:rgba(30,168,106,0.1);color:var(--green);border:1px solid rgba(30,168,106,0.25);padding:2px 8px;font-size:0.62rem;font-weight:700;letter-spacing:0.5px}
+.badge-pending{background:rgba(201,168,76,0.07);color:var(--g1);border:1px solid var(--border2);padding:2px 8px;font-size:0.62rem;font-weight:700;letter-spacing:0.5px}
+.table-empty{padding:2.5rem;text-align:center;color:var(--muted);font-size:0.85rem;font-style:italic;font-family:'Cormorant Garamond',serif}
+.table-filters{display:flex;gap:0.75rem;margin-bottom:1rem;flex-wrap:wrap;align-items:center}
+.table-filter{background:var(--ink4);border:1px solid var(--border);color:var(--txt2);padding:0.45rem 0.9rem;font-size:0.78rem;font-family:'DM Sans',sans-serif;outline:none;cursor:pointer}
+.table-filter:focus{border-color:var(--border2)}
+.admin-rifas-grid{display:grid;gap:1rem}
+.admin-rifa-row{background:var(--ink4);border:1px solid var(--border);padding:1rem;display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:0.75rem;align-items:center}
+.admin-img-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
+.admin-img-card{background:var(--ink4);border:1px solid var(--border);padding:1rem;text-align:center}
+.admin-img-card .img-preview{width:100%;height:100px;object-fit:contain;margin-bottom:0.5rem;background:var(--ink2)}
+.admin-img-card .img-emoji{font-size:3rem;display:flex;align-items:center;justify-content:center;height:100px}
+.admin-img-card .img-name{font-size:0.76rem;font-weight:600;margin-bottom:0.5rem;color:var(--txt)}
+.sorteo-config{background:var(--ink4);border:1px solid var(--border);padding:1.5rem;margin-bottom:1rem}
+.sorteo-config h4{font-family:'Playfair Display',serif;font-size:1.2rem;letter-spacing:1px;margin-bottom:0.75rem;color:var(--g1)}
+.imgbb-key-row{display:flex;gap:0.75rem;margin-bottom:0.75rem}
+
+/* ===== FOOTER ===== */
+footer{background:var(--ink2);border-top:1px solid var(--border);padding:4.5rem 2rem;position:relative}
+footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--g4),transparent)}
+.footer-inner{max-width:900px;margin:0 auto;text-align:center}
+.footer-logo{font-family:'Playfair Display',serif;font-size:2.4rem;letter-spacing:3px;color:var(--g2);margin-bottom:0.2rem}
+.footer-logo span{color:var(--red)}
+.footer-tagline{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--muted);margin-bottom:0.8rem}
+.footer-orn{display:flex;align-items:center;gap:1.2rem;max-width:280px;margin:0 auto 2rem}
+.footer-orn::before,.footer-orn::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--g5))}
+.footer-orn span{font-size:0.55rem;color:var(--g4);letter-spacing:4px;opacity:0.7}
+.footer-links{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem}
+.footer-links a{color:var(--muted);font-size:0.68rem;transition:color 0.2s;letter-spacing:2px;text-transform:uppercase}
+.footer-links a:hover{color:var(--g1)}
+.footer-copy{font-size:0.65rem;color:var(--muted);opacity:0.45;letter-spacing:1.5px}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  .nav-links,.nav-actions .btn-nav-verify{display:none}
+  .hamburger{display:flex}
+  .hero h1{font-size:clamp(3.2rem,13vw,5rem)}
+  .hero-corner{width:70px;height:70px}
+  .admin-stats{grid-template-columns:repeat(2,1fr)}
+  .admin-form-row{grid-template-columns:1fr}
+  .admin-rifa-row{grid-template-columns:1fr 1fr}
+  .admin-rifa-row .admin-btn{grid-column:1/-1}
+  .rifas-grid{grid-template-columns:1fr}
+  .winners-grid{grid-template-columns:1fr}
+  nav{padding:0 1.5rem}
+  .hero-beam{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo-wrap" href="#hero">
+    <span class="nav-logo">RifaEpreexx <em>PTY</em></span>
+    <span class="nav-tagline">Sorteos de Élite · Panamá</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#hero">Inicio</a></li>
+    <li><a href="#rifas">Rifas Activas</a></li>
+    <li><a href="#verificar">Verificar Boleto</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-nav-verify" onclick="scrollTo('#verificar')">Verificar Boleto</button>
+    <button class="btn-nav-admin" onclick="openAdmin()">Admin</button>
+    <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#hero" onclick="toggleMenu()">Inicio</a>
+  <a href="#rifas" onclick="toggleMenu()">Rifas Activas</a>
+  <a href="#verificar" onclick="toggleMenu()">Verificar Boleto</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-corner tl"></div>
+  <div class="hero-corner tr"></div>
+  <div class="hero-corner bl"></div>
+  <div class="hero-corner br"></div>
+  <div class="hero-beam"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-tag"><span class="hero-dot"></span> Sorteos en Vivo · Panamá</div>
+  <h1>
+    <span class="l1">La Élite de los Sorteos</span>
+    <span class="l2">RifaEpreexx</span>
+    <span class="l3">PTY ◆ 2026</span>
+  </h1>
+  <div class="hero-orn"><span>◆ ◆ ◆</span></div>
+  <p class="hero-sub">Accede a la élite de los ganadores.<br>La plataforma <strong>#1 en seguridad</strong> y premios de lujo en Panamá.</p>
+  <div class="hero-pills">
+    <div class="hero-pill"><span class="dot"></span> Premios Garantizados</div>
+    <div class="hero-pill"><span class="dot"></span> 100% Seguros</div>
+    <div class="hero-pill"><span class="dot"></span> Panamá</div>
+  </div>
+  <div class="hero-ctas">
+    <button class="btn-primary" onclick="scrollTo('#rifas')">Ver Rifas Activas</button>
+    <button class="btn-secondary" onclick="scrollTo('#verificar')">Verificar Boleto</button>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-num" id="s-total">0</div><div class="stat-lbl">Total Boletos</div></div>
+  <div class="stat-item"><div class="stat-num" id="s-approved">0</div><div class="stat-lbl">Aprobados</div></div>
+  <div class="stat-item"><div class="stat-num" id="s-pending">0</div><div class="stat-lbl">Pendientes</div></div>
+  <div class="stat-item"><div class="stat-num" id="s-rifas">0</div><div class="stat-lbl">Rifas Activas</div></div>
+</div>
+
+<!-- TIMER -->
+<div class="timer-section">
+  <div class="timer-label"><span class="timer-icon">◆</span> Próximo Sorteo</div>
+  <div class="timer-units">
+    <div class="t-unit"><span class="t-num" id="td">--</span><span class="t-lbl">Días</span></div>
+    <div class="t-sep">:</div>
+    <div class="t-unit"><span class="t-num" id="th">--</span><span class="t-lbl">Horas</span></div>
+    <div class="t-sep">:</div>
+    <div class="t-unit"><span class="t-num" id="tm">--</span><span class="t-lbl">Min</span></div>
+    <div class="t-sep">:</div>
+    <div class="t-unit"><span class="t-num" id="ts">--</span><span class="t-lbl">Seg</span></div>
+  </div>
+</div>
+
+<!-- RIFAS -->
+<div class="section" id="rifas">
+  <div class="section-header">
+    <div>
+      <div class="section-eyebrow">◆ Catálogo Exclusivo</div>
+      <div class="section-title">Sorteos <span>Disponibles</span></div>
+      <div class="section-subtitle">Selecciona tu premio y asegura tu oportunidad de ganar.</div>
+    </div>
+  </div>
+  <div class="filters" id="filters">
+    <button class="filter-btn active" onclick="setFilter(this,'todos')">Todos</button>
+    <button class="filter-btn" onclick="setFilter(this,'autos')">Autos</button>
+    <button class="filter-btn" onclick="setFilter(this,'motos')">Motos</button>
+    <button class="filter-btn" onclick="setFilter(this,'tech')">Tech</button>
+    <button class="filter-btn" onclick="setFilter(this,'efectivo')">Efectivo</button>
+  </div>
+  <div class="rifas-grid" id="rifas-grid">
+    <div class="rifa-empty">Cargando rifas...</div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- GANADORES -->
+<div class="winners-section" id="ganadores">
+  <div class="winners-inner">
+    <div class="winners-head">
+      <div class="eyebrow">◆ Hall of Fame</div>
+      <h2>Ganadores Recientes</h2>
+      <p>Conoce a los afortunados que cambiaron su vida con RifaEpreexx PTY</p>
+    </div>
+    <div class="winners-grid" id="winners-grid">
+      <div class="winners-empty">
+        <span class="winners-empty-icon">◆ ◆ ◆</span>
+        Próximamente se anunciarán los primeros ganadores...
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VERIFICAR -->
+<div class="verify-section" id="verificar">
+  <div class="verify-head">
+    <div class="eyebrow">◆ Sistema de Verificación</div>
+    <h2>Verificar Boleto</h2>
+    <p>Ingresa tu número de teléfono/WhatsApp <strong>o</strong> el número de boleto para consultar su estado en tiempo real.</p>
+  </div>
+  <div class="verify-tabs">
+    <button class="verify-tab active" id="tab-tel" onclick="switchVerifyTab('tel')">Por Teléfono</button>
+    <button class="verify-tab" id="tab-num" onclick="switchVerifyTab('num')">Por Número</button>
+  </div>
+  <div id="verify-tel-panel">
+    <div class="verify-row">
+      <input class="verify-input" id="verify-tel" placeholder="Ej: +507 6000-0000" />
+      <button class="verify-search-btn" onclick="buscarBoleto('tel')">Buscar</button>
+    </div>
+    <div class="verify-hint">Los boletos <strong>Aprobados</strong> aparecen en verde · <strong>Pendientes</strong> en dorado</div>
+  </div>
+  <div id="verify-num-panel" style="display:none">
+    <div class="verify-row">
+      <input class="verify-input" id="verify-num" placeholder="Ej: 00482 (5 dígitos)" maxlength="5" />
+      <button class="verify-search-btn" onclick="buscarBoleto('num')">Buscar</button>
+    </div>
+    <div class="verify-hint">Asegúrate de ingresar los 5 dígitos correctamente.</div>
+  </div>
+  <div class="verify-loading" id="verify-loading">◆ Consultando base de datos...</div>
+  <div class="verify-result" id="verify-result">
+    <div class="vr-status" id="vr-status"></div>
+    <div class="vr-detail" id="vr-detail"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">RifaEpreexx<span>PTY</span></div>
+    <div class="footer-tagline">La plataforma #1 de sorteos de lujo en Panamá</div>
+    <div class="footer-orn"><span>◆ ◆ ◆</span></div>
+    <div class="footer-links">
+      <a href="#">Términos y Condiciones</a>
+      <a href="#">Política de Privacidad</a>
+      <a href="#">Política de Cookies</a>
+    </div>
+    <div class="footer-copy" id="footer-copy" onclick="secretClick()" style="cursor:default;user-select:none">RifaEpreexx-PTY © 2026. Todos los derechos reservados.</div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<div class="whatsapp-float" onclick="openWA('Hola, tengo una duda sobre RifaEpreexx PTY')" title="¿Tienes dudas? Escríbenos">💬</div>
+
+<!-- COOKIE BANNER -->
+<div class="cookie-banner" id="cookieBanner">
+  <div class="cookie-text">Usamos cookies para mejorar tu experiencia. Al continuar navegando aceptas nuestra <a href="#">Política de Cookies</a>.</div>
+  <button class="cookie-btn" onclick="acceptCookies()">Entendido</button>
+</div>
+
+<!-- MODAL COMPRA -->
+<div class="modal-overlay" id="modalCompra">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modalCompra')">✕</button>
+    <div id="modal-compra-content"></div>
+  </div>
+</div>
+
+<!-- MODAL ADMIN -->
+<div class="modal-overlay" id="modalAdmin">
+  <div class="modal-box admin-modal">
+    <button class="modal-close" onclick="closeModal('modalAdmin')" style="z-index:2">✕</button>
+    <div class="admin-login" id="adminLogin">
+      <div style="font-size:1.2rem;margin-bottom:0.5rem;letter-spacing:8px;color:var(--g4)">◆◆◆</div>
+      <h3>Acceso Administrador</h3>
+      <p>Ingresa tu PIN de 4 dígitos para acceder al panel</p>
+      <div class="pin-inputs">
+        <input class="pin-input" id="p0" maxlength="1" type="password" oninput="pinNext(0)" />
+        <input class="pin-input" id="p1" maxlength="1" type="password" oninput="pinNext(1)" />
+        <input class="pin-input" id="p2" maxlength="1" type="password" oninput="pinNext(2)" />
+        <input class="pin-input" id="p3" maxlength="1" type="password" oninput="pinNext(3)" />
+      </div>
+      <div class="pin-error" id="pinError"></div>
+      <button class="btn-admin-enter" onclick="checkPin()">Entrar</button>
+      <div class="admin-hint">Cambia el PIN buscando <code>ADMIN_PIN</code> en el código</div>
+    </div>
+    <div class="admin-panel" id="adminPanel">
+      <div class="admin-tabs">
+        <button class="admin-tab active" onclick="switchAdminTab(this,'boletos')">Boletos</button>
+        <button class="admin-tab" onclick="switchAdminTab(this,'imagenes')">Imágenes</button>
+        <button class="admin-tab" onclick="switchAdminTab(this,'rifas-cfg')">Rifas</button>
+        <button class="admin-tab" onclick="switchAdminTab(this,'sorteo')">Sorteo</button>
+      </div>
+      <div class="admin-content">
+        <div id="tab-boletos">
+          <div class="admin-stats">
+            <div class="admin-stat"><div class="admin-stat-num" id="a-total">0</div><div class="admin-stat-lbl">Total</div></div>
+            <div class="admin-stat"><div class="admin-stat-num" id="a-approved">0</div><div class="admin-stat-lbl">Aprobados</div></div>
+            <div class="admin-stat"><div class="admin-stat-num" id="a-pending">0</div><div class="admin-stat-lbl">Pendientes</div></div>
+            <div class="admin-stat"><div class="admin-stat-num" id="a-rifas-count">0</div><div class="admin-stat-lbl">Rifas</div></div>
+          </div>
+          <div style="font-size:0.6rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem">Agregar Boleto Manualmente</div>
+          <div class="admin-form-row" style="grid-template-columns:1fr 1fr 1fr 1fr auto">
+            <div><label class="form-label">Rifa</label><select class="form-select" id="admin-rifa-sel" style="height:41px"><option value="">— Seleccionar —</option></select></div>
+            <div><label class="form-label">Comprador</label><input class="form-input" id="admin-nombre" placeholder="Nombre completo" /></div>
+            <div><label class="form-label">Teléfono</label><input class="form-input" id="admin-tel" placeholder="+507 6000-0000" /></div>
+            <div><label class="form-label">Estado</label>
+              <select class="form-select" id="admin-estado" style="height:41px">
+                <option value="pendiente">Pendiente</option>
+                <option value="aprobado">Aprobado ✓</option>
+              </select>
+            </div>
+            <div style="display:flex;align-items:flex-end"><button class="admin-btn" onclick="addBoleto()">Agregar</button></div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;flex-wrap:wrap;gap:0.5rem">
+            <div style="font-size:0.6rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted)">Boletos Registrados</div>
+            <button class="admin-btn secondary" onclick="exportCSV()">Exportar CSV</button>
+          </div>
+          <div class="table-filters">
+            <select class="table-filter" id="filter-estado" onchange="renderTable()">
+              <option value="">Todos los estados</option>
+              <option value="aprobado">Aprobados</option>
+              <option value="pendiente">Pendientes</option>
+            </select>
+            <select class="table-filter" id="filter-rifa" onchange="renderTable()">
+              <option value="">Todas las rifas</option>
+            </select>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>#Boleto</th><th>Comprador</th><th>Teléfono</th><th>Rifa</th><th>Estado</th><th>Acciones</th></tr></thead>
+              <tbody id="boletos-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div id="tab-imagenes" style="display:none">
+          <div class="sorteo-config">
+            <h4>API Key de ImgBB</h4>
+            <p style="font-size:0.78rem;color:var(--muted);margin-bottom:0.75rem">Regístrate en <a href="https://imgbb.com" target="_blank" style="color:var(--g1)">imgbb.com</a> → My Profile → API → copia tu key.</p>
+            <div class="imgbb-key-row">
+              <input class="form-input" id="imgbb-key" placeholder="Tu API key de ImgBB" />
+              <button class="admin-btn" onclick="saveImgbbKey()">Guardar</button>
+            </div>
+          </div>
+          <div class="admin-img-grid" id="admin-img-grid"></div>
+        </div>
+        <div id="tab-rifas-cfg" style="display:none">
+          <div style="font-size:0.6rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:1rem">Configurar Rifas</div>
+          <p style="font-size:0.78rem;color:var(--muted);margin-bottom:1rem">Edita nombre, precio y porcentaje. Para imágenes ve a la pestaña <strong>Imágenes</strong>.</p>
+          <div class="admin-rifas-grid" id="admin-rifas-grid"></div>
+          <button class="admin-btn" onclick="saveRifas()" style="margin-top:1rem;width:100%">Guardar Cambios en Rifas</button>
+        </div>
+        <div id="tab-sorteo" style="display:none">
+          <div class="sorteo-config">
+            <h4>Configurar Fecha de Sorteo</h4>
+            <div class="form-group">
+              <label class="form-label">Fecha y hora del sorteo</label>
+              <input class="form-input" id="sorteo-fecha" type="datetime-local" />
+            </div>
+            <button class="admin-btn" onclick="saveFecha()">Guardar Fecha</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+// ============================================================
+// 🔥 FIREBASE CONFIG — Pega aquí tu configuración real
+// ============================================================
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, doc, addDoc, getDocs, updateDoc, deleteDoc, onSnapshot, setDoc }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "TU_API_KEY",
+  authDomain: "TU_PROYECTO.firebaseapp.com",
+  projectId: "TU_PROYECTO_ID",
+  storageBucket: "TU_PROYECTO.appspot.com",
+  messagingSenderId: "123456789",
+  appId: "1:123456789:web:abc123"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// ============================================================
+// VARIABLES GLOBALES (igual que antes)
+// ============================================================
+const ADMIN_PIN = '1234';
+let boletos = [];
+let rifas = [];
+let sorteoFecha = '';
+let imgbbKey = localStorage.getItem('mrp_imgbb') || '';
+let currentFilter = 'todos', currentRifaId = '', currentRifaPrecio = 0, qty = 1;
+
+// Rifas por defecto si Firestore está vacío
+const rifasDefault = [
+  {id:'r1',nombre:'Moto Sport 2025',desc:'La moto sport más veloz del mercado. Motor 600cc, full opciones.',precio:150,emoji:'🏍️',badge:'HOT',cat:'motos',pct:65,img:''},
+  {id:'r2',nombre:'SUV Familiar 2024',desc:'Vehículo familiar, tecnología avanzada, 7 pasajeros.',precio:500,emoji:'🚙',badge:'NUEVO',cat:'autos',pct:40,img:''},
+  {id:'r3',nombre:'$5,000 en Efectivo',desc:'Cinco mil dólares en efectivo entregados el día del sorteo.',precio:50,emoji:'💵',badge:'HOT',cat:'efectivo',pct:88,img:''},
+  {id:'r4',nombre:'Laptop Gamer RTX',desc:'Laptop gaming RTX 4080, 32GB RAM, 1TB SSD. Sellada.',precio:100,emoji:'💻',badge:'',cat:'tech',pct:52,img:''},
+];
+
+// ============================================================
+// CARGAR DATOS DESDE FIRESTORE AL INICIAR
+// ============================================================
+async function cargarDatos() {
+  // Cargar boletos (escucha en tiempo real)
+  onSnapshot(collection(db, 'boletos'), (snap) => {
+    boletos = snap.docs.map(d => ({ _docId: d.id, ...d.data() }));
+    renderTable();
+    renderGanadores();
+    updateStats();
+  });
+
+  // Cargar rifas
+  const snapRifas = await getDocs(collection(db, 'rifas'));
+  if (snapRifas.empty) {
+    // Primera vez: sube las rifas por defecto
+    for (const r of rifasDefault) {
+      await setDoc(doc(db, 'rifas', r.id), r);
+    }
+    rifas = [...rifasDefault];
+  } else {
+    rifas = snapRifas.docs.map(d => ({ ...d.data(), id: d.id }));
+  }
+
+  // Cargar config
+  const cfgDoc = await getDocs(collection(db, 'config'));
+  cfgDoc.forEach(d => {
+    if (d.id === 'sorteo') sorteoFecha = d.data().fecha || '';
+  });
+
+  renderRifas();
+  updateAdminRifaSel();
+  startTimer();
+}
+
+// ============================================================
+// GUARDAR — Reemplaza la función save() original
+// ============================================================
+async function saveRifasFirebase() {
+  for (const r of rifas) {
+    await setDoc(doc(db, 'rifas', r.id), r);
+  }
+  updateStats();
+}
+
+// ============================================================
+// BOLETOS — Agregar, aprobar, eliminar
+// ============================================================
+async function confirmarCompra() {
+  const nombre = document.getElementById('c-nombre')?.value.trim();
+  const tel = document.getElementById('c-tel')?.value.trim();
+  const metodo = document.getElementById('c-metodo')?.value;
+  const terms = document.getElementById('c-terms')?.checked;
+  if (!nombre) { alert('Por favor ingresa tu nombre completo.'); return; }
+  if (!tel) { alert('Por favor ingresa tu número de WhatsApp.'); return; }
+  if (!metodo) { alert('Por favor selecciona un método de pago.'); return; }
+  if (!terms) { alert('Debes aceptar los términos y condiciones.'); return; }
+
+  const numeros = Array.from({ length: qty + 1 }, () => genNumero());
+  const rifa = rifas.find(r => r.id === currentRifaId) || { nombre: 'Rifa' };
+  const boleto = {
+    numero: numeros[0], rifaId: currentRifaId, rifaNombre: rifa.nombre,
+    nombre, tel, metodo, estado: 'pendiente', numeros,
+    fecha: new Date().toLocaleDateString('es-PA', { day: '2-digit', month: 'short', year: 'numeric' })
+  };
+
+  await addDoc(collection(db, 'boletos'), boleto);
+  // boletos se actualiza solo por onSnapshot ☝️
+
+  document.getElementById('modal-compra-content').innerHTML = `
+    <div class="success-box">
+      <span class="success-icon">◆</span>
+      <div class="success-title">¡Compra Recibida!</div>
+      <div class="success-sub">Tu compra será validada en máximo 24 horas.<br>Recibirás confirmación por WhatsApp.</div>
+      <div class="numbers-box">
+        <div class="numbers-lbl">Tus Números Asignados</div>
+        <div class="numbers-status">◆ Pendiente de Validación</div>
+        <div class="numbers-val">${numeros.join(' · ')}</div>
+        <button class="btn-copy-nums" onclick="copyText('${numeros.join(', ')}')">◆ Copiar mis números</button>
+        <button class="btn-wa" onclick="openWA('Hola! Compré ${qty} boleto(s) para ${rifa.nombre}. Números: ${numeros.join(', ')}. Nombre: ${nombre}. Tel: ${tel}.')">💬 Enviar comprobante por WhatsApp</button>
+      </div>
+      <div class="success-bonus">Tienes un boleto adicional por tu participación. Usa el verificador para consultar tus boletos.</div>
+      <button class="btn-go-verify" onclick="closeModal('modalCompra');scrollTo('#verificar')">Consultar en el Verificador</button>
+    </div>
+  `;
+}
+
+async function aprobarBoleto(i) {
+  const b = boletos[i];
+  if (!b?._docId) return;
+  await updateDoc(doc(db, 'boletos', b._docId), { estado: 'aprobado' });
+}
+
+async function deleteBoleto(i) {
+  if (!confirm('¿Eliminar este boleto?')) return;
+  const b = boletos[i];
+  if (!b?._docId) return;
+  await deleteDoc(doc(db, 'boletos', b._docId));
+}
+
+async function addBoleto() {
+  const rifaId = document.getElementById('admin-rifa-sel').value;
+  const nombre = document.getElementById('admin-nombre').value.trim();
+  const tel = document.getElementById('admin-tel').value.trim();
+  const estado = document.getElementById('admin-estado').value;
+  if (!rifaId || !nombre || !tel) { alert('Completa todos los campos.'); return; }
+  const rifa = rifas.find(r => r.id === rifaId);
+  await addDoc(collection(db, 'boletos'), {
+    numero: genNumero(), rifaId, rifaNombre: rifa?.nombre || '', nombre, tel, estado,
+    numeros: [genNumero()], fecha: new Date().toLocaleDateString('es-PA', { day: '2-digit', month: 'short', year: 'numeric' })
+  });
+  document.getElementById('admin-nombre').value = '';
+  document.getElementById('admin-tel').value = '';
+}
+
+async function saveFecha() {
+  sorteoFecha = document.getElementById('sorteo-fecha').value;
+  await setDoc(doc(db, 'config', 'sorteo'), { fecha: sorteoFecha });
+  alert('Fecha de sorteo guardada.');
+}
+
+// ============================================================
+// RIFAS (admin)
+// ============================================================
+async function addRifa() {
+  const nueva = { id: 'r' + Date.now(), nombre: 'Nueva Rifa', desc: 'Descripción.', precio: 100, emoji: '🎁', badge: '', cat: 'otros', pct: 0, img: '' };
+  await setDoc(doc(db, 'rifas', nueva.id), nueva);
+  rifas.push(nueva);
+  renderAdminRifas(); renderRifas(); updateAdminRifaSel();
+}
+
+async function deleteRifa(id) {
+  if (!confirm('¿Eliminar esta rifa?')) return;
+  await deleteDoc(doc(db, 'rifas', id));
+  rifas = rifas.filter(r => r.id !== id);
+  renderAdminRifas(); renderRifas(); updateAdminRifaSel();
+}
+
+async function saveRifas() {
+  await saveRifasFirebase();
+  renderRifas(); updateAdminRifaSel(); alert('Rifas actualizadas.');
+}
+
+// ============================================================
+// EL RESTO DE LAS FUNCIONES (sin cambios)
+// ============================================================
+// ... pega aquí todas las demás funciones que no tocan save()/boletos directamente
+// (updateStats, startTimer, renderRifas, renderGanadores, openCompra, etc.)
+
+// ============================================================
+// INIT
+// ============================================================
+window.addEventListener('DOMContentLoaded', () => {
+  if (localStorage.getItem('mrp_cookies')) document.getElementById('cookieBanner').classList.add('hide');
+  cargarDatos();
+  ['modalCompra', 'modalAdmin'].forEach(id => {
+    document.getElementById(id).addEventListener('click', function(e) { if (e.target === this) closeModal(id); });
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeModal('modalCompra'); closeModal('modalAdmin'); }
+  });
+});
+</script>
+</body>
+</html>
